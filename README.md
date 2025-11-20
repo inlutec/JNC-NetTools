@@ -36,12 +36,12 @@ Bibliotecas de Python
 3. Instalación y Ejecución
 Instalación
     1. Clonar el repositorio:
-       git clone https://github.com/inlutec/JNC-NetTools.git
+       git clone https://github.com/inlutec/JNC-NetTools.git 
        cd JNC-Scan
-    2. Instalar Dependencias del Sistema:
+    3. Instalar Dependencias del Sistema:
        sudo apt update
        sudo apt install python3-pip nmap tcpdump dnsmasq hostapd iw
-    3. Configurar el Entorno Python:
+    4. Configurar el Entorno Python:
        python3 -m venv venv
        source venv/bin/activate
        pip install -r requirements.txt
