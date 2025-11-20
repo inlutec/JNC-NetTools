@@ -9,9 +9,6 @@ def main():
     if os.geteuid() != 0:
         print("This application requires root privileges to manage network interfaces.")
         print("Please run with sudo.")
-        # In a real GUI app we might want to show a dialog before exiting, 
-        # but for now we'll just print to stdout.
-        # We can also attempt to restart with sudo, but that's complex for now.
         sys.exit(1)
 
     app = QApplication(sys.argv)
