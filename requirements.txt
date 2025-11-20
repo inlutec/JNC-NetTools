@@ -1,0 +1,6 @@
+PyQt6
+pyroute2
+scapy
+python-nmap
+netifaces
+psutil

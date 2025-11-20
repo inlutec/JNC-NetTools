@@ -1,0 +1,86 @@
+# JNC-Scan Walkthrough
+
+This guide explains how to run and verify the **JNC-Scan** network diagnostic tool.
+
+## Prerequisites
+
+Ensure you have the required system dependencies:
+```bash
+sudo apt install python3-pyqt6 nmap tcpdump bridge-utils hostapd dnsmasq python3-venv libxcb-cursor0 ethtool
+```
+
+## Installation (Virtual Environment)
+
+Since modern Linux distributions manage Python packages externally, we should use a virtual environment:
+
+1.  **Create a virtual environment**:
+    ```bash
+    python3 -m venv venv
+    ```
+
+2.  **Activate it and install dependencies**:
+    ```bash
+    source venv/bin/activate
+    pip install -r requirements.txt
+    ```
+
+## Running the Application
+
+**CRITICAL**: The application requires **root privileges**. When using a virtual environment, point `sudo` to the venv's Python executable:
+
+```bash
+sudo ./venv/bin/python3 main.py
+```
+
+## Verification Steps
+
+### 1. Interface Management
+- **Launch**: Verify the app starts and lists your network interfaces.
+- **Details**: Select an interface to see its IP, MAC, and status.
+
+### 2. IP Configuration & Calculator
+- **Static IP**: Go to "IP Configuration". Select an interface, choose "Static", enter an IP (e.g., `192.168.99.1`) and CIDR (`24`). Click "Apply". Verify with `ip addr` in a terminal.
+- **Calculator**: Enter an IP and CIDR in the calculator section. Click "Calculate" to see the Netmask and Broadcast address.
+
+### 3. VLAN & Bridging
+- **Wired Bridge**:
+    1.  Go to "VLAN / Bridge".
+    2.  Select your main Ethernet (Trunk) and a secondary Ethernet (Access).
+    3.  Enter a VLAN ID (e.g., `35`).
+    4.  Click "Create Bridge".
+    5.  Verify connectivity on the secondary interface.
+- **Wi-Fi AP**:
+    1.  Select a Wireless interface.
+    2.  Enter SSID and Password.
+    3.  Select the bridge you just created (e.g., `br35`).
+    4.  Click "Start Wi-Fi AP".
+- **VLAN Scanner**:
+    1.  In "VLAN / Bridge", look for "Passive VLAN Scanner".
+    2.  Select an interface.
+    3.  Click "Start Scan".
+    4.  Wait 10 seconds. The table will show any VLAN tags detected on the wire.
+
+### 4. Network Scanner
+- Go to "Scanner".
+- Enter a range (e.g., `192.168.1.0/24`).
+- Click "Scan Network".
+- Verify the list of devices appears.
+
+### 5. Packet Sniffer
+- Go to "Sniffer".
+- Select an interface (e.g., the bridge `br35`).
+- Click "Start Sniffing".
+- Generate traffic (ping, browse).
+- Verify packets appear in the table.
+
+### 6. Reporting
+- Click "Generate Report" in the toolbar.
+- Save the HTML file.
+- Open it in a browser to view the summary of interfaces, scan results, and captured packets.
+
+## Troubleshooting
+
+- **"No module named..."**: Ensure you are running inside the venv: `sudo ./venv/bin/python3 main.py`.
+- **"xcb plugin error"**: Install `libxcb-cursor0`.
+- **"Permission denied"**: Ensure you are running with `sudo`.
+- **NetworkManager errors**: Ensure `nmcli` is installed (`sudo apt install network-manager`).
