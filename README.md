@@ -79,7 +79,7 @@ La aplicación sigue una arquitectura modular que separa claramente la lógica d
 ### Estructura de Directorios
 
 ```
-JNC-Scan/
+JNC-NetTools/
 ├── main.py                     # Punto de entrada principal
 ├── JNC-Scan_Launcher.sh        # Script de lanzamiento con sudo
 ├── requirements.txt            # Dependencias Python (si existe)
