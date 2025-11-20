@@ -49,7 +49,7 @@ JNC-NetTools es una suite integral de diagnóstico y gestión de redes diseñada
 ```bash
 # 1. Clonar el repositorio
 git clone https://github.com/inlutec/JNC-NetTools.git
-cd JNC-Scan
+cd JNC-NetTools
 
 # 2. Instalar dependencias del sistema
 sudo apt update
