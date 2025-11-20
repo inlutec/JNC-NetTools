@@ -36,8 +36,10 @@ Bibliotecas de Python
 3. Instalación y Ejecución
 Instalación
     1. Clonar el repositorio:
-       git clone https://github.com/inlutec/JNC-NetTools.git 
+       git clone https://github.com/inlutec/JNC-NetTools.git
+       
        cd JNC-Scan
+       
     3. Instalar Dependencias del Sistema:
        sudo apt update
        sudo apt install python3-pip nmap tcpdump dnsmasq hostapd iw
@@ -48,6 +50,7 @@ Instalación
        (Si falta 
        requirements.txt, instale manualmente: pip install PyQt6 python-nmap scapy psutil pyroute2)
 Ejecución
+
 Para ejecutar la aplicación, utilice el script de lanzamiento proporcionado que gestiona los permisos de root y la activación del entorno virtual:
 bash JNC-Scan_Launcher.sh
 Nota: Se le solicitará su contraseña de sudo.
@@ -82,7 +85,6 @@ JNC-Scan/
 │   │       └── diagnostics_view.py
 │   └── utils/
 │       └── report_generator.py # Generación de Informes HTML
-
 
 
 
