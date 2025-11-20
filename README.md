@@ -1,77 +1,99 @@
-JNC-NetTools // Versión ADA - Documentación Técnica
-1. Introducción
-JNC-NetTools es una suite integral de diagnóstico y gestión de redes diseñada para sistemas Linux . Proporciona una interfaz gráfica de usuario (GUI) para tareas de red avanzadas que normalmente requieren interacciones complejas en la línea de comandos.
-Capacidades Clave:
-    • Gestión de Interfaces de Red (IP, Subred, Puerta de Enlace).
-    • Bridging Avanzado (Trunks VLAN, Passthrough, Wi-Fi a Ethernet).
-    • Escaneo de Redes y Puertos (Integración con Nmap).
-    • Análisis de Tráfico y Sniffing de Paquetes (Integración con Scapy).
-    • Diagnóstico de Red (Ping, Traceroute, DNS).
-    • Generación Automatizada de Informes (HTML).
+# JNC-NetTools // Versión ADA - Documentación Técnica
 
-2. Requisitos del Sistema
-Sistema Operativo
-    • Linux (Probado en Linux Mint / Ubuntu / Debian).
-    • Privilegios de Root: Requeridos para la mayoría de las operaciones (manipulación de interfaces, escaneo de sockets raw, sniffing).
-Dependencias de Software
-La aplicación depende de herramientas de red estándar de Linux y bibliotecas de Python:
-    • Python: 3.8 o superior.
-    • Herramientas del Sistema:
-        ◦ iproute2 (comando ip)
-        ◦ nmap (Mapeador de Redes)
-        ◦ tcpdump (Captura de paquetes)
-        ◦ dnsmasq (Servidor DHCP)
-        ◦ hostapd (Punto de Acceso Wi-Fi)
-        ◦ iw (Configuración inalámbrica)
-        ◦ ethtool (Estadísticas de interfaz - opcional)
-Bibliotecas de Python
-    • PyQt6: Framework GUI.
-    • python-nmap: Wrapper de Python para Nmap.
-    • scapy: Manipulación y sniffing de paquetes.
-    • psutil: Monitoreo del sistema.
-    • pyroute2: Redes avanzadas en Linux (Netlink).
+## 1. Introducción
 
-3. Instalación y Ejecución
-Instalación
-    1. Clonar el repositorio:
-       git clone <url_del_repositorio>
-       cd JNC-Scan
-    2. Instalar Dependencias del Sistema:
-       sudo apt update
-       sudo apt install python3-pip nmap tcpdump dnsmasq hostapd iw
-    3. Configurar el Entorno Python:
-       python3 -m venv venv
-       source venv/bin/activate
-       pip install -r requirements.txt
-       (Si falta 
-       requirements.txt, instale manualmente: pip install PyQt6 python-nmap scapy psutil pyroute2)
-Ejecución
-Para ejecutar la aplicación, utilice el script de lanzamiento proporcionado que gestiona los permisos de root y la activación del entorno virtual:
+JNC-NetTools es una suite integral de diagnóstico y gestión de redes diseñada para sistemas Linux. Proporciona una interfaz gráfica de usuario (GUI) para tareas de red avanzadas que normalmente requieren interacciones complejas en la línea de comandos.
+
+### Capacidades Clave
+- Gestión de Interfaces de Red (IP, Subred, Puerta de Enlace)
+- Bridging Avanzado (Trunks VLAN, Passthrough, Wi-Fi a Ethernet)
+- Escaneo de Redes y Puertos (Integración con Nmap)
+- Análisis de Tráfico y Sniffing de Paquetes (Integración con Scapy)
+- Diagnóstico de Red (Ping, Traceroute, DNS)
+- Generación Automatizada de Informes (HTML)
+
+## 2. Requisitos del Sistema
+
+### Sistema Operativo
+- Linux (Probado en Linux Mint / Ubuntu / Debian)
+- Privilegios de Root: Requeridos para la mayoría de las operaciones (manipulación de interfaces, escaneo de sockets raw, sniffing)
+
+### Dependencias de Software
+
+#### Herramientas del Sistema
+| Herramienta   | Descripción                              | Obligatoria |
+|---------------|------------------------------------------|-------------|
+| iproute2      | Comando `ip`                             | Sí          |
+| nmap          | Mapeador de redes                        | Sí          |
+| tcpdump       | Captura de paquetes                      | Sí          |
+| dnsmasq       | Servidor DHCP                            | Sí          |
+| hostapd       | Punto de acceso Wi-Fi                    | Sí          |
+| iw            | Configuración inalámbrica                | Sí          |
+| ethtool       | Estadísticas de interfaz                 | Opcional    |
+
+#### Bibliotecas de Python
+| Biblioteca     | Uso Principal                          |
+|----------------|----------------------------------------|
+| PyQt6          | Framework GUI                          |
+| python-nmap    | Wrapper de Nmap                        |
+| scapy          | Manipulación y sniffing de paquetes    |
+| psutil         | Monitoreo del sistema                  |
+| pyroute2       | Redes avanzadas en Linux (Netlink)     |
+
+- Python: 3.8 o superior
+
+## 3. Instalación y Ejecución
+
+### Instalación
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/inlutec/JNC-NetTools.git
+cd JNC-Scan
+
+# 2. Instalar dependencias del sistema
+sudo apt update
+sudo apt install python3-pip nmap tcpdump dnsmasq hostapd iw
+
+# 3. Configurar entorno virtual
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Si no existe requirements.txt, instalar manualmente:
+# pip install PyQt6 python-nmap scapy psutil pyroute2
+```
+
+### Ejecución
+
+```bash
 bash JNC-Scan_Launcher.sh
-Nota: Se le solicitará su contraseña de sudo.
+```
 
+> Nota: El launcher gestiona automáticamente la activación del entorno virtual y los privilegios de root (se solicitará la contraseña sudo).
 
+## 4. Arquitectura Técnica
 
+La aplicación sigue una arquitectura modular que separa claramente la lógica del núcleo (backend) de la interfaz gráfica (frontend).
 
+### Estructura de Directorios
 
-
-4. Arquitectura Técnica
-La aplicación sigue una arquitectura modular que separa la Lógica del Núcleo (Backend) de la GUI (Frontend).
-Estructura de Directorios
+```
 JNC-Scan/
-├── main.py                 # Punto de entrada
-├── JNC-Scan_Launcher.sh    # Script de inicio
+├── main.py                     # Punto de entrada principal
+├── JNC-Scan_Launcher.sh        # Script de lanzamiento con sudo
+├── requirements.txt            # Dependencias Python (si existe)
 ├── src/
-│   ├── core/               # Lógica Backend
-│   │   ├── network_manager.py  # Lógica de Interfaz, Bridge, DHCP, Wi-Fi
-│   │   ├── scanner.py          # Lógica de Escáner de Puertos/Red Nmap
-│   │   ├── sniffer.py          # Lógica de Sniffer Scapy
-│   │   ├── vlan_scanner.py     # Detección pasiva de VLAN (tcpdump)
-│   │   └── diagnostics.py      # Ping, Traceroute, etc.
-│   ├── gui/                # Frontend (PyQt6)
-│   │   ├── main_window.py      # Ventana principal de la aplicación
-│   │   ├── styles.py           # Hojas de estilo CSS/QSS
-│   │   └── widgets/            # Pestañas de funciones individuales
+│   ├── core/                   # Lógica Backend
+│   │   ├── network_manager.py  # Gestión de interfaces, bridges, DHCP, Wi-Fi AP
+│   │   ├── scanner.py          # Escáner de red y puertos (Nmap)
+│   │   ├── sniffer.py          # Sniffer con Scapy
+│   │   ├── vlan_scanner.py     # Detección pasiva de VLANs (tcpdump)
+│   │   └── diagnostics.py      # Ping, traceroute, DNS lookup
+│   ├── gui/                    # Frontend PyQt6
+│   │   ├── main_window.py      # Ventana principal y pestañas
+│   │   ├── styles.py           # Hojas de estilo QSS
+│   │   └── widgets/            # Widgets por funcionalidad
 │   │       ├── ip_config.py
 │   │       ├── vlan_bridge.py
 │   │       ├── scanner_view.py
@@ -79,90 +101,77 @@ JNC-Scan/
 │   │       ├── sniffer_view.py
 │   │       └── diagnostics_view.py
 │   └── utils/
-│       └── report_generator.py # Generación de Informes HTML
+│       └── report_generator.py # Generación de informes HTML
+```
 
+## 5. Funcionalidades Detalladas e Implementación Técnica
 
+### A. Configuración IP
+- Uso de `psutil` + `pyroute2` para lectura
+- Aplicación persistente mediante `nmcli` (NetworkManager)
+- Refresco en tiempo real de interfaces
 
+### B. VLAN y Bridging Avanzado
+- Creación de VLANs: `ip link add link <dev> name <dev.id> type vlan id <id>`
+- Bridges: `ip link add name <br> type bridge`
+- Servidor DHCP integrado con `dnsmasq`
+- AP Wi-Fi con `hostapd` + configuración dinámica
+- Soporte automático para modo 4addr (WDS) en interfaces Wi-Fi cliente
+- Escáner pasivo de VLANs mediante `tcpdump -e` + regex 802.1Q
 
-5. Funcionalidades Detalladas e Implementación Técnica
-A. Configuración IP
-    • Función: Ver y configurar direcciones IP, subredes y puertas de enlace.
-    • Implementación:
-        ◦ Utiliza psutil y pyroute2 para obtener el estado de la interfaz.
-        ◦ Utiliza nmcli (CLI de NetworkManager) para aplicar configuraciones persistentes (IP Estática o DHCP).
-        ◦ Refresco: Actualizaciones en tiempo real de la lista de interfaces.
-B. VLAN y Bridging
-    • Función: Crear puentes de red complejos.
-        ◦ VLAN Trunk: Puentea un ID de VLAN específico desde un puerto trunk a un puerto de acceso.
-        ◦ Passthrough: Puentea transparentemente dos interfaces.
-        ◦ Bridging Wi-Fi AP: Crea un punto de acceso Wi-Fi puenteado a una red cableada.
-    • Detalles Técnicos:
-        ◦ VLANs: Creadas usando ip link add link <dev> name <dev.id> type vlan id <id>.
-        ◦ Bridges: Creados usando ip link add name <br> type bridge.
-        ◦ Servidor DHCP: Lanza un proceso dnsmasq vinculado a la interfaz del puente para servir direcciones IP a los clientes conectados.
-        ◦ Wi-Fi AP: Genera un hostapd.conf temporal y lanza hostapd.
-        ◦ Bridging de Cliente Wi-Fi (Corrección Error 95): Intenta automáticamente habilitar el modo 4addr (WDS) usando iw dev <iface> set 4addr on para permitir que los clientes Wi-Fi sean puenteados. Maneja los errores EOPNOTSUPP con elegancia.
-        ◦ Escáner Pasivo de VLAN: Utiliza tcpdump -e para capturar cabeceras y análisis regex para detectar etiquetas 802.1Q en un puerto trunk sin unirse a la VLAN.
+### C. Escáner de Red (Host Discovery)
+- Motor: Nmap
+- Prioriza escaneo ARP en redes locales
+- Soporte completo para detener escaneo en ejecución
+- Filtros en tiempo real (Up/Down)
 
+### D. Escáner de Puertos
+- Modos: TCP Connect (`-sT`), UDP (`-sU`), o ambos
+- Optimizado con `--min-rate 1000 -T4`
+- Oculta automáticamente puertos cerrados en rangos grandes (>500)
+- Ejecutado en `QThread` para mantener GUI receptiva
 
+### E. Sniffer de Paquetes
+- Motor: `scapy.sniff`
+- Soporte completo para filtros BPF
+- Decodificación de capas Ethernet/IP/TCP/UDP/ICMP
+- Detección automática de anomalías (RST, ICMP Unreachable, retransmisiones)
+- Vista separada de "Todo el tráfico" vs "Solo anomalías"
 
-C. Escáner de Red (Descubrimiento)
-    • Función: Descubre dispositivos activos en un rango de red (CIDR).
-    • Implementación:
-        ◦ Motor: nmap.
-        ◦ Método: Escaneo ARP/Ping (lógica equivalente a -sn, pero usamos -sT con skip_discovery=False para asegurar verificación activa).
-        ◦ Optimización: Prioriza ARP para redes locales para mayor velocidad.
-        ◦ Características: Registro en tiempo real, capacidad de "Detener Escaneo", Filtros de Estado (Up/Down).
-D. Escáner de Puertos
-    • Función: Análisis detallado de una IP objetivo específica.
-    • Implementación:
-        ◦ Motor: nmap.
-        ◦ Modos: TCP Connect (-sT), UDP (-sU), o Ambos.
-        ◦ Rendimiento: Utiliza --min-rate 1000 y -T4 para velocidad.
-        ◦ Rangos Grandes: Oculta automáticamente los puertos "Cerrados" si se escanean >500 puertos para evitar congelamientos de la UI.
-        ◦ Hilos: Se ejecuta en un QThread para mantener la GUI receptiva.
-E. Sniffer de Paquetes
-    • Función: Análisis de tráfico en tiempo real.
-    • Implementación:
-        ◦ Motor: scapy.sniff.
-        ◦ Filtros: Soporta BPF (ej. tcp port 80) y Filtro IP Personalizado (post-filtro basado en GUI).
-        ◦ Análisis:
-            ▪ Decodifica capas Ethernet, IP, TCP, UDP, ICMP.
-            ▪ Detección de Anomalías: Resalta banderas "RST" (Reinicio de Conexión), errores ICMP Unreachable y Retransmisiones.
-            ▪ Vista Dividida: Separa "Todo el Tráfico" de "Anomalías" para una depuración más fácil.
+### F. Diagnósticos
+- Wrappers con análisis de salida para: `ping`, `traceroute`, `nslookup`
 
+### G. Generación de Informes
+- Informe HTML completo con todos los resultados de la sesión
+- Estilizado y con timestamps
 
+## 6. Guía para Desarrolladores
 
-F. Diagnósticos
-    • Función: Herramientas de conectividad estándar.
-    • Implementación: Wrappers alrededor de comandos del sistema (ping, traceroute, nslookup) con análisis de salida para mostrar en un área de texto de la GUI.
-G. Informes
-    • Función: Genera un informe HTML de la sesión actual.
-    • Implementación: Recopila datos de todos los widgets (resultados de escaneo, registros del sniffer) y los compila en un archivo HTML estilizado utilizando formato de cadenas de Python.
+### Añadir una nueva pestaña
+1. Crear widget en `src/gui/widgets/nueva_herramienta.py`
+2. Heredar de `QWidget`
+3. Importar en `src/gui/main_window.py`
+4. Añadir: `self.tabs.addTab(NuevaHerramienta(), "Nueva Herramienta")`
 
-6. Guía para Desarrolladores (Modificando el Código)
-Añadir una Nueva Pestaña
-    1. Cree un nuevo archivo de widget en src/gui/widgets/ (ej. mi_herramienta.py).
-    2. Defina una clase que herede de QWidget.
-    3. Impórtela en src/gui/main_window.py.
-    4. Añádala a las pestañas: self.tabs.addTab(MiHerramienta(), "Mi Herramienta").
-Modificar Escaneos Nmap
-    • Edite src/core/scanner.py.
-    • El método scan() construye los argumentos del comando Nmap. Puede añadir banderas como -O (Detección de SO) o -sV (Detección de Versión) aquí.
-Personalizar el Sniffer
-    • Edite src/core/sniffer.py.
-    • La función process_packet determina cómo se analizan los paquetes. Puede añadir lógica para detectar payloads específicos (ej. cabeceras HTTP, firmas de malware específicas).
-Estilos
-    • Edite src/gui/styles.py.
-    • La aplicación utiliza QSS (Hojas de Estilo Qt). Puede cambiar colores, fuentes y comportamientos de los widgets aquí.
+### Modificar escaneos Nmap
+- Editar `src/core/scanner.py` → método `scan()`
+- Añadir flags como `-O` (detección SO) o `-sV` (versiones)
 
-7. Solución de Problemas
-    • "Operation not supported" (Error 95): Ocurre al puentear una interfaz Wi-Fi que no soporta el modo de 4 direcciones.
-        ◦ Solución: Use una tarjeta Wi-Fi que soporte modo WDS/Mesh, o use el modo "Wi-Fi AP" en lugar de puentear una conexión cliente.
-    • "iw: command not found": Falta la herramienta iw en el sistema.
-        ◦ Solución: sudo apt install iw.
-    • Sin Resultados de Escaneo:
-        ◦ Asegúrese de estar ejecutando como root (a través del lanzador).
-        ◦ Verifique si el firewall (ufw) está bloqueando las respuestas.
-    • Congelamiento de UI:
-        ◦ Un tráfico extremadamente alto en el Sniffer puede ralentizar la UI. Use el filtro BPF para reducir el volumen de captura.
+### Personalizar el sniffer
+- Editar `src/core/sniffer.py` → función `process_packet`
+- Añadir detección de payloads específicos (HTTP, malware, etc.)
+
+### Cambiar estilos
+- Editar `src/gui/styles.py` (QSS)
+
+## 7. Solución de Problemas Comunes
+
+| Problema                              | Causa más común                              | Solución                                                                 |
+|---------------------------------------|----------------------------------------------|--------------------------------------------------------------------------|
+| "Operation not supported" (Error 95)  | Wi-Fi no soporta modo 4addr/WDS              | Usar tarjeta compatible o modo "Wi-Fi AP" en lugar de puente cliente     |
+| `iw: command not found`               | Herramienta `iw` no instalada                | `sudo apt install iw`                                                    |
+| Sin resultados en escaneos            | No ejecutado como root o firewall bloqueando | Usar el launcher oficial / desactivar temporalmente ufw                  |
+| UI se congela en sniffer              | Volumen de tráfico muy alto                  | Aplicar filtro BPF estricto (ej. `tcp port 80`)                          |
+
+¡Listo para copiar y pegar directamente en tu `README.md` de GitHub!  
+Mantendrá perfectamente el formato con tablas, código y estructura de carpetas.
