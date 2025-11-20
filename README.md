@@ -1,4 +1,6 @@
 JNC-NetTools // Versión ADA - Documentación Técnica
+
+
 1. Introducción
 JNC-NetTools es una suite integral de diagnóstico y gestión de redes diseñada para sistemas Linux . Proporciona una interfaz gráfica de usuario (GUI) para tareas de red avanzadas que normalmente requieren interacciones complejas en la línea de comandos.
 Capacidades Clave:
