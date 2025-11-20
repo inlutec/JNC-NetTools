@@ -1,6 +1,4 @@
 JNC-NetTools // Versión ADA - Documentación Técnica
-
-
 1. Introducción
 JNC-NetTools es una suite integral de diagnóstico y gestión de redes diseñada para sistemas Linux . Proporciona una interfaz gráfica de usuario (GUI) para tareas de red avanzadas que normalmente requieren interacciones complejas en la línea de comandos.
 Capacidades Clave:
@@ -36,34 +34,31 @@ Bibliotecas de Python
 3. Instalación y Ejecución
 Instalación
     1. Clonar el repositorio:
-       git clone https://github.com/inlutec/JNC-NetTools.git
-       
+       git clone <url_del_repositorio>
        cd JNC-Scan
-       
-    3. Instalar Dependencias del Sistema:
+    2. Instalar Dependencias del Sistema:
        sudo apt update
        sudo apt install python3-pip nmap tcpdump dnsmasq hostapd iw
-    4. Configurar el Entorno Python:
+    3. Configurar el Entorno Python:
        python3 -m venv venv
        source venv/bin/activate
        pip install -r requirements.txt
        (Si falta 
        requirements.txt, instale manualmente: pip install PyQt6 python-nmap scapy psutil pyroute2)
 Ejecución
-
 Para ejecutar la aplicación, utilice el script de lanzamiento proporcionado que gestiona los permisos de root y la activación del entorno virtual:
 bash JNC-Scan_Launcher.sh
 Nota: Se le solicitará su contraseña de sudo.
+
+
+
+
 
 
 4. Arquitectura Técnica
 La aplicación sigue una arquitectura modular que separa la Lógica del Núcleo (Backend) de la GUI (Frontend).
 Estructura de Directorios
 JNC-Scan/
-
-
-
-
 ├── main.py                 # Punto de entrada
 ├── JNC-Scan_Launcher.sh    # Script de inicio
 ├── src/
@@ -85,6 +80,7 @@ JNC-Scan/
 │   │       └── diagnostics_view.py
 │   └── utils/
 │       └── report_generator.py # Generación de Informes HTML
+
 
 
 
