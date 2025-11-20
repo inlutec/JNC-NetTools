@@ -173,5 +173,3 @@ JNC-NetTools/
 | Sin resultados en escaneos            | No ejecutado como root o firewall bloqueando | Usar el launcher oficial / desactivar temporalmente ufw                  |
 | UI se congela en sniffer              | Volumen de tráfico muy alto                  | Aplicar filtro BPF estricto (ej. `tcp port 80`)                          |
 
-¡Listo para copiar y pegar directamente en tu `README.md` de GitHub!  
-Mantendrá perfectamente el formato con tablas, código y estructura de carpetas.
