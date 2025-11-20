@@ -36,7 +36,7 @@ Bibliotecas de Python
 3. Instalación y Ejecución
 Instalación
     1. Clonar el repositorio:
-       git clone <url_del_repositorio>
+       git clone https://github.com/inlutec/JNC-NetTools.git
        cd JNC-Scan
     2. Instalar Dependencias del Sistema:
        sudo apt update
